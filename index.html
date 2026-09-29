@@ -1,0 +1,1376 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduVN - Luyện tập trực tuyến</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6fb;
+    color: #172033;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    padding: 16px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+}
+
+/* HERO */
+.hero {
+    padding: 70px 7%;
+    background: linear-gradient(135deg, #eaf2ff, #f3eaff);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 46px;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: #5b3df5;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    color: #5f6b7d;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.start-btn {
+    margin-top: 25px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    background: #5b3df5;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-btn:hover {
+    background: #4528d7;
+}
+
+/* SECTION */
+section {
+    padding: 55px 7%;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.title h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.title p {
+    color: #697586;
+}
+
+/* SUBJECTS */
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.subject {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    box-shadow: 0 6px 25px rgba(30, 50, 90, .08);
+    transition: .2s;
+}
+
+.subject:hover {
+    transform: translateY(-5px);
+    border-color: #7657ff;
+}
+
+.subject.active {
+    border-color: #5b3df5;
+    background: #f3f0ff;
+}
+
+.subject-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.subject h3 {
+    margin-bottom: 8px;
+}
+
+.subject p {
+    color: #788397;
+    font-size: 14px;
+}
+
+/* PRACTICE */
+.practice-section {
+    background: #111827;
+    color: white;
+}
+
+.practice-container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.practice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #aeb8c8;
+}
+
+.progress-background {
+    width: 100%;
+    height: 9px;
+    background: #374151;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    transition: .3s;
+}
+
+.question-box {
+    background: #1f2937;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.question-number {
+    color: #a78bfa;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.question-text {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.answers {
+    display: grid;
+    gap: 13px;
+}
+
+.answer {
+    padding: 17px;
+    border: 2px solid #374151;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.answer:hover {
+    border-color: #8b5cf6;
+    background: #293548;
+}
+
+.answer.correct {
+    background: #064e3b;
+    border-color: #10b981;
+}
+
+.answer.wrong {
+    background: #7f1d1d;
+    border-color: #ef4444;
+}
+
+.answer.disabled {
+    pointer-events: none;
+}
+
+.explanation {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #293548;
+    line-height: 1.6;
+}
+
+.next-btn {
+    margin-top: 25px;
+    padding: 13px 22px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.next-btn:hover {
+    background: #6424d5;
+}
+
+/* RESULT */
+.result {
+    display: none;
+    margin-top: 25px;
+    background: #172033;
+    border: 2px solid #7c3aed;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.result-score {
+    font-size: 50px;
+    font-weight: bold;
+    color: #a78bfa;
+    margin: 15px;
+}
+
+/* STATISTICS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(30, 50, 90, .08);
+}
+
+.stat-number {
+    display: block;
+    font-size: 35px;
+    font-weight: bold;
+    color: #5b3df5;
+    margin-bottom: 8px;
+}
+
+/* FOOTER */
+footer {
+    background: #111827;
+    color: #9ca3af;
+    padding: 30px;
+    text-align: center;
+}
+
+@media(max-width: 700px) {
+
+    header {
+        padding: 15px 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .question-text {
+        font-size: 20px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🎓 EduVN
+    </div>
+
+    <nav>
+        <a href="#mon-hoc">Môn học</a>
+        <a href="#luyen-tap">Luyện tập</a>
+        <a href="#thong-ke">Thống kê</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <h1>
+        Học tập dễ dàng với <span>EduVN</span>
+    </h1>
+
+    <p>
+        Luyện tập hàng nghìn câu hỏi thuộc nhiều môn học.
+        Chọn môn học, trả lời câu hỏi và theo dõi kết quả của bạn.
+    </p>
+
+    <button class="start-btn" onclick="goPractice()">
+        🚀 Bắt đầu luyện tập
+    </button>
+
+</div>
+
+
+<!-- MÔN HỌC -->
+
+<section id="mon-hoc">
+
+    <div class="title">
+
+        <h2>📚 Các môn học</h2>
+
+        <p>
+            Chọn một môn để bắt đầu luyện tập
+        </p>
+
+    </div>
+
+
+    <div class="subjects">
+
+        <div class="subject active"
+             onclick="chooseSubject('Toán học', this)">
+
+            <div class="subject-icon">📐</div>
+
+            <h3>Toán học</h3>
+
+            <p>Đại số, hình học, số học</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Ngữ văn', this)">
+
+            <div class="subject-icon">📖</div>
+
+            <h3>Ngữ văn</h3>
+
+            <p>Văn học và đọc hiểu</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Tiếng Anh', this)">
+
+            <div class="subject-icon">🇬🇧</div>
+
+            <h3>Tiếng Anh</h3>
+
+            <p>Từ vựng và ngữ pháp</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Vật lý', this)">
+
+            <div class="subject-icon">⚡</div>
+
+            <h3>Vật lý</h3>
+
+            <p>Cơ học và điện học</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Hóa học', this)">
+
+            <div class="subject-icon">🧪</div>
+
+            <h3>Hóa học</h3>
+
+            <p>Nguyên tử và phản ứng</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Sinh học', this)">
+
+            <div class="subject-icon">🧬</div>
+
+            <h3>Sinh học</h3>
+
+            <p>Tế bào và di truyền</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Lịch sử', this)">
+
+            <div class="subject-icon">🏛️</div>
+
+            <h3>Lịch sử</h3>
+
+            <p>Việt Nam và thế giới</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Địa lý', this)">
+
+            <div class="subject-icon">🌍</div>
+
+            <h3>Địa lý</h3>
+
+            <p>Tự nhiên và kinh tế</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('Tin học', this)">
+
+            <div class="subject-icon">💻</div>
+
+            <h3>Tin học</h3>
+
+            <p>Máy tính và lập trình</p>
+
+        </div>
+
+
+        <div class="subject"
+             onclick="chooseSubject('GDCD', this)">
+
+            <div class="subject-icon">⚖️</div>
+
+            <h3>GDCD</h3>
+
+            <p>Công dân và pháp luật</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LUYỆN TẬP -->
+
+<section class="practice-section" id="luyen-tap">
+
+    <div class="title">
+
+        <h2>🧠 Khu vực luyện tập</h2>
+
+        <p>
+            Trả lời câu hỏi để kiểm tra kiến thức
+        </p>
+
+    </div>
+
+
+    <div class="practice-container">
+
+        <div class="practice-header">
+
+            <span id="currentSubject">
+                Toán học
+            </span>
+
+            <span id="questionCounter">
+                Câu 1 / 10
+            </span>
+
+        </div>
+
+
+        <div class="progress-background">
+
+            <div class="progress-bar"
+                 id="progressBar">
+            </div>
+
+        </div>
+
+
+        <div class="question-box">
+
+            <div class="question-number">
+                CÂU HỎI
+            </div>
+
+
+            <div class="question-text"
+                 id="questionText">
+            </div>
+
+
+            <div class="answers"
+                 id="answers">
+            </div>
+
+
+            <div class="explanation"
+                 id="explanation">
+            </div>
+
+
+            <button class="next-btn"
+                    onclick="nextQuestion()">
+
+                Câu tiếp theo →
+
+            </button>
+
+
+            <div class="result"
+                 id="result">
+
+                <h2>🎉 Hoàn thành!</h2>
+
+                <div class="result-score"
+                     id="resultScore">
+                    0%
+                </div>
+
+                <p id="resultText"></p>
+
+                <button class="next-btn"
+                        onclick="restartQuiz()">
+
+                    🔄 Làm lại
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- THỐNG KÊ -->
+
+<section id="thong-ke">
+
+    <div class="title">
+
+        <h2>📊 Thống kê</h2>
+
+        <p>
+            Thành tích luyện tập của bạn
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <span class="stat-number"
+                  id="totalAnswered">
+                0
+            </span>
+
+            Câu đã làm
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="stat-number"
+                  id="totalCorrect">
+                0
+            </span>
+
+            Câu đúng
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="stat-number"
+                  id="accuracy">
+                0%
+            </span>
+
+            Chính xác
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="stat-number"
+                  id="bestScore">
+                0%
+            </span>
+
+            Điểm cao nhất
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>🎓 EduVN</h3>
+
+    <br>
+
+    <p>
+        Nền tảng luyện tập trực tuyến bằng tiếng Việt
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   NGÂN HÀNG CÂU HỎI
+========================= */
+
+const questionBank = {
+
+    "Toán học": [
+
+        {
+            question: "5 + 7 bằng bao nhiêu?",
+            answers: ["10", "11", "12", "13"],
+            correct: 2,
+            explanation: "5 + 7 = 12."
+        },
+
+        {
+            question: "12 × 5 bằng bao nhiêu?",
+            answers: ["50", "55", "60", "65"],
+            correct: 2,
+            explanation: "12 × 5 = 60."
+        },
+
+        {
+            question: "Căn bậc hai của 81 là?",
+            answers: ["7", "8", "9", "10"],
+            correct: 2,
+            explanation: "9 × 9 = 81."
+        },
+
+        {
+            question: "2² + 3² bằng bao nhiêu?",
+            answers: ["10", "11", "12", "13"],
+            correct: 3,
+            explanation: "2² + 3² = 4 + 9 = 13."
+        },
+
+        {
+            question: "Một tam giác có tổng ba góc bằng bao nhiêu?",
+            answers: ["90°", "180°", "270°", "360°"],
+            correct: 1,
+            explanation: "Tổng ba góc trong một tam giác là 180°."
+        }
+
+    ],
+
+
+    "Tiếng Anh": [
+
+        {
+            question: "She ___ to school every day.",
+            answers: ["go", "goes", "going", "gone"],
+            correct: 1,
+            explanation: "Chủ ngữ She dùng động từ goes ở hiện tại đơn."
+        },
+
+        {
+            question: "What is the opposite of 'big'?",
+            answers: ["small", "long", "high", "fast"],
+            correct: 0,
+            explanation: "Opposite của big là small."
+        },
+
+        {
+            question: "I ___ a student.",
+            answers: ["am", "is", "are", "be"],
+            correct: 0,
+            explanation: "Với I dùng am."
+        },
+
+        {
+            question: "What color is the sky on a clear day?",
+            answers: ["Green", "Blue", "Black", "Orange"],
+            correct: 1,
+            explanation: "Bầu trời thường có màu xanh — Blue."
+        }
+
+    ],
+
+
+    "Vật lý": [
+
+        {
+            question: "Đơn vị đo cường độ dòng điện là gì?",
+            answers: ["Volt", "Watt", "Ampere", "Ohm"],
+            correct: 2,
+            explanation: "Cường độ dòng điện được đo bằng Ampe (A)."
+        },
+
+        {
+            question: "Đơn vị của vận tốc là?",
+            answers: ["kg", "m/s", "N", "J"],
+            correct: 1,
+            explanation: "Vận tốc thường được đo bằng mét trên giây (m/s)."
+        },
+
+        {
+            question: "Lực được đo bằng đơn vị nào?",
+            answers: ["Newton", "Volt", "Watt", "Ohm"],
+            correct: 0,
+            explanation: "Lực được đo bằng Newton (N)."
+        }
+
+    ],
+
+
+    "Hóa học": [
+
+        {
+            question: "Công thức hóa học của nước là?",
+            answers: ["CO₂", "O₂", "H₂O", "NaCl"],
+            correct: 2,
+            explanation: "Nước có công thức H₂O."
+        },
+
+        {
+            question: "O₂ là khí gì?",
+            answers: ["Nitơ", "Oxi", "Hiđro", "Cacbonic"],
+            correct: 1,
+            explanation: "O₂ là khí oxi."
+        },
+
+        {
+            question: "NaCl thường được gọi là gì?",
+            answers: ["Đường", "Muối ăn", "Nước", "Baking soda"],
+            correct: 1,
+            explanation: "NaCl là natri clorua, thành phần chính của muối ăn."
+        }
+
+    ],
+
+
+    "Sinh học": [
+
+        {
+            question: "Đơn vị cơ bản của sự sống là gì?",
+            answers: ["Mô", "Cơ quan", "Tế bào", "Hệ cơ quan"],
+            correct: 2,
+            explanation: "Tế bào là đơn vị cơ bản của sự sống."
+        },
+
+        {
+            question: "Cây xanh quang hợp chủ yếu ở đâu?",
+            answers: ["Rễ", "Thân gỗ", "Lá", "Hoa"],
+            correct: 2,
+            explanation: "Lá chứa nhiều lục lạp nên là nơi quang hợp chủ yếu."
+        }
+
+    ],
+
+
+    "Lịch sử": [
+
+        {
+            question: "Ngày Quốc khánh Việt Nam là ngày nào?",
+            answers: [
+                "30/4",
+                "2/9",
+                "19/5",
+                "7/5"
+            ],
+            correct: 1,
+            explanation: "Quốc khánh Việt Nam là ngày 2 tháng 9."
+        },
+
+        {
+            question: "Ai là người đọc Tuyên ngôn Độc lập năm 1945?",
+            answers: [
+                "Võ Nguyên Giáp",
+                "Hồ Chí Minh",
+                "Trường Chinh",
+                "Phạm Văn Đồng"
+            ],
+            correct: 1,
+            explanation: "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập ngày 2/9/1945."
+        }
+
+    ],
+
+
+    "Địa lý": [
+
+        {
+            question: "Việt Nam nằm ở khu vực nào của châu Á?",
+            answers: [
+                "Đông Nam Á",
+                "Đông Á",
+                "Nam Á",
+                "Tây Á"
+            ],
+            correct: 0,
+            explanation: "Việt Nam thuộc khu vực Đông Nam Á."
+        },
+
+        {
+            question: "Thủ đô của Việt Nam là?",
+            answers: [
+                "Hải Phòng",
+                "Đà Nẵng",
+                "Hà Nội",
+                "Huế"
+            ],
+            correct: 2,
+            explanation: "Hà Nội là thủ đô của Việt Nam."
+        }
+
+    ],
+
+
+    "Tin học": [
+
+        {
+            question: "HTML được dùng chủ yếu để làm gì?",
+            answers: [
+                "Tạo cấu trúc trang web",
+                "Chỉnh sửa ảnh",
+                "Chơi game",
+                "Soạn nhạc"
+            ],
+            correct: 0,
+            explanation: "HTML dùng để xây dựng cấu trúc nội dung của trang web."
+        },
+
+        {
+            question: "CSS dùng để làm gì?",
+            answers: [
+                "Tạo cơ sở dữ liệu",
+                "Trang trí và định dạng website",
+                "Gửi email",
+                "Tính toán"
+            ],
+            correct: 1,
+            explanation: "CSS dùng để định dạng và tạo giao diện cho website."
+        }
+
+    ],
+
+
+    "Ngữ văn": [
+
+        {
+            question: "Thể loại của truyện ngắn là gì?",
+            answers: [
+                "Thơ",
+                "Tự sự",
+                "Kịch",
+                "Nghị luận"
+            ],
+            correct: 1,
+            explanation: "Truyện ngắn thuộc nhóm tác phẩm tự sự."
+        },
+
+        {
+            question: "Biện pháp tu từ so sánh dùng để làm gì?",
+            answers: [
+                "Đối chiếu sự vật",
+                "Kể chuyện",
+                "Đặt câu hỏi",
+                "Liệt kê"
+            ],
+            correct: 0,
+            explanation: "So sánh giúp làm nổi bật đặc điểm của sự vật."
+        }
+
+    ],
+
+
+    "GDCD": [
+
+        {
+            question: "Công dân có quyền gì?",
+            answers: [
+                "Quyền học tập",
+                "Quyền phá hoại tài sản",
+                "Quyền vi phạm pháp luật",
+                "Quyền gây mất trật tự"
+            ],
+            correct: 0,
+            explanation: "Học tập là một quyền cơ bản của công dân."
+        }
+
+    ]
+
+};
+
+
+/* =========================
+   BIẾN HỆ THỐNG
+========================= */
+
+let currentSubject = "Toán học";
+
+let currentQuestion = 0;
+
+let answered = false;
+
+let score = 0;
+
+let totalAnswered = 0;
+
+let totalCorrect = 0;
+
+let bestScore = 0;
+
+
+/* =========================
+   CHỌN MÔN
+========================= */
+
+function chooseSubject(subject, element) {
+
+    currentSubject = subject;
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answered = false;
+
+
+    document
+        .querySelectorAll(".subject")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    element.classList.add("active");
+
+
+    loadQuestion();
+
+
+    goPractice();
+}
+
+
+/* =========================
+   HIỂN THỊ CÂU HỎI
+========================= */
+
+function loadQuestion() {
+
+    const questions =
+        questionBank[currentSubject];
+
+
+    if (!questions || questions.length === 0) {
+
+        alert("Môn học này chưa có câu hỏi.");
+
+        return;
+    }
+
+
+    answered = false;
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    document.getElementById("currentSubject")
+        .textContent = currentSubject;
+
+
+    document.getElementById("questionCounter")
+        .textContent =
+        "Câu " +
+        (currentQuestion + 1) +
+        " / " +
+        questions.length;
+
+
+    document.getElementById("questionText")
+        .textContent =
+        q.question;
+
+
+    const answersBox =
+        document.getElementById("answers");
+
+
+    answersBox.innerHTML = "";
+
+
+    q.answers.forEach((answer, index) => {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className = "answer";
+
+
+        div.textContent =
+            String.fromCharCode(65 + index) +
+            ". " +
+            answer;
+
+
+        div.onclick = function() {
+
+            checkAnswer(index, div);
+
+        };
+
+
+        answersBox.appendChild(div);
+
+    });
+
+
+    document.getElementById("explanation")
+        .style.display = "none";
+
+
+    document.getElementById("result")
+        .style.display = "none";
+
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   KIỂM TRA ĐÁP ÁN
+========================= */
+
+function checkAnswer(index, element) {
+
+    if (answered) return;
+
+
+    answered = true;
+
+
+    const questions =
+        questionBank[currentSubject];
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    totalAnswered++;
+
+
+    const allAnswers =
+        document.querySelectorAll(".answer");
+
+
+    if (index === q.correct) {
+
+        score++;
+
+        totalCorrect++;
+
+        element.classList.add("correct");
+
+    } else {
+
+        element.classList.add("wrong");
+
+        allAnswers[q.correct]
+            .classList.add("correct");
+
+    }
+
+
+    allAnswers.forEach(answer => {
+
+        answer.classList.add("disabled");
+
+    });
+
+
+    const explanation =
+        document.getElementById("explanation");
+
+
+    explanation.innerHTML =
+        "<b>💡 Giải thích:</b><br>" +
+        q.explanation;
+
+
+    explanation.style.display =
+        "block";
+
+
+    updateStatistics();
+
+}
+
+
+/* =========================
+   CÂU TIẾP THEO
+========================= */
+
+function nextQuestion() {
+
+    if (!answered) {
+
+        alert("⚠️ Hãy chọn một đáp án trước!");
+
+        return;
+    }
+
+
+    const questions =
+        questionBank[currentSubject];
+
+
+    currentQuestion++;
+
+
+    if (currentQuestion >= questions.length) {
+
+        showResult();
+
+        return;
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   KẾT QUẢ
+========================= */
+
+function showResult() {
+
+    const questions =
+        questionBank[currentSubject];
+
+
+    const percentage =
+        Math.round(
+            (score / questions.length) * 100
+        );
+
+
+    if (percentage > bestScore) {
+
+        bestScore = percentage;
+
+    }
+
+
+    document.getElementById("resultScore")
+        .textContent =
+        percentage + "%";
+
+
+    document.getElementById("resultText")
+        .textContent =
+        "Bạn trả lời đúng " +
+        score +
+        "/" +
+        questions.length +
+        " câu.";
+
+
+    document.getElementById("result")
+        .style.display = "block";
+
+
+    updateStatistics();
+
+}
+
+
+/* =========================
+   LÀM LẠI
+========================= */
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answered = false;
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   THANH TIẾN ĐỘ
+========================= */
+
+function updateProgress() {
+
+    const questions =
+        questionBank[currentSubject];
+
+
+    const percentage =
+        ((currentQuestion) /
+        questions.length) * 100;
+
+
+    document.getElementById("progressBar")
+        .style.width =
+        percentage + "%";
+
+}
+
+
+/* =========================
+   THỐNG KÊ
+========================= */
+
+function updateStatistics() {
+
+    document.getElementById("totalAnswered")
+        .textContent =
+        totalAnswered;
+
+
+    document.getElementById("totalCorrect")
+        .textContent =
+        totalCorrect;
+
+
+    let accuracy = 0;
+
+
+    if (totalAnswered > 0) {
+
+        accuracy =
+            Math.round(
+                (totalCorrect /
+                totalAnswered) * 100
+            );
+
+    }
+
+
+    document.getElementById("accuracy")
+        .textContent =
+        accuracy + "%";
+
+
+    document.getElementById("bestScore")
+        .textContent =
+        bestScore + "%";
+
+}
+
+
+/* =========================
+   CUỘN ĐẾN PHẦN LUYỆN TẬP
+========================= */
+
+function goPractice() {
+
+    document.getElementById("luyen-tap")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================
+   KHỞI ĐỘNG
+========================= */
+
+loadQuestion();
+
+updateStatistics();
+
+</script>
+
+</body>
+</html>
+```
